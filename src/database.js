@@ -39,7 +39,12 @@ export class DataBase {
     const rowIndex = this.#database[table].findIndex(row => row.id === id);
 
     if (rowIndex > -1) {
-      this.#database[table][rowIndex] = { id, ...data }
+      this.#database[table][rowIndex] = {
+        ...this.#database[table][rowIndex],
+        title: data.title,
+        description: data.description,
+        updated_at: new Date(),
+      }
       this.#persist();
     }
   }

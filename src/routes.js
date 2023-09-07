@@ -21,7 +21,7 @@ export const routes = [
     handler: (req, res) => {
       const { title, description } = req.body;
 
-      const user = {
+      const task = {
         id: randomUUID(),
         title,
         description,
@@ -30,9 +30,26 @@ export const routes = [
         updated_at: null
       }
 
-      database.insert('tasks', user)
+      database.insert('tasks', task)
 
-      return res.writeHead(201).end(JSON.stringify(user))
+      return res.writeHead(201).end(JSON.stringify(task))
+    }
+  },
+  {
+    method: 'PUT',
+    path: buildRoutePath('/tasks/:id'),
+    handler: (req, res) => {
+      const { id } = req.params;
+      const { title, description, completed_at } = req.body;
+
+      const task = {
+        title,
+        description
+      }
+
+      database.update('tasks', id, task)
+
+      return res.end(JSON.stringify(task))
     }
   },
   {
