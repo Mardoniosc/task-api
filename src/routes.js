@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { DataBase } from "./database.js";
 import { buildRoutePath } from "./utils/build-route-path.js";
 
@@ -12,6 +13,26 @@ export const routes = [
       const tasks = database.select('tasks')
 
       return res.end(JSON.stringify(tasks))
+    }
+  },
+  {
+    method: 'POST',
+    path: buildRoutePath('/tasks'),
+    handler: (req, res) => {
+      const { title, description } = req.body;
+
+      const user = {
+        id: randomUUID(),
+        title,
+        description,
+        completed_at: null,
+        created_at: new Date(),
+        updated_at: null
+      }
+
+      database.insert('tasks', user)
+
+      return res.writeHead(201).end(JSON.stringify(user))
     }
   },
 ]
