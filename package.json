@@ -1,0 +1,13 @@
+{
+  "name": "task-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Api de gerenciamento de tarefas",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch .\\src\\server.js"
+  },
+  "keywords": [],
+  "author": "Mardonio S Costa",
+  "license": "ISC"
+}
