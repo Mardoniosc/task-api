@@ -73,7 +73,9 @@ export const routes = [
         description
       }
 
-      database.update('tasks', id, task)
+      const result = database.update('tasks', id, task)
+
+      if (!result) return res.writeHead(404).end('ID not found')
 
       return res.end(JSON.stringify(task))
     }
@@ -84,7 +86,9 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params;
 
-      database.updateColumn('tasks', id, true, 'completed_at')
+      const result = database.updateColumn('tasks', id, true, 'completed_at')
+
+      if (!result) return res.writeHead(404).end('ID not found')
 
       return res.writeHead(204).end()
     }
@@ -96,7 +100,9 @@ export const routes = [
 
       const { id } = req.params;
 
-      database.delete('tasks', id)
+      const result = database.delete('tasks', id)
+
+      if (!result) return res.writeHead(404).end('ID not found')
 
       return res.writeHead(204).end()
     }
