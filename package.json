@@ -5,9 +5,12 @@
   "description": "Api de gerenciamento de tarefas",
   "main": "src/server.js",
   "scripts": {
-    "dev": "node --watch .\\src\\server.js"
+    "dev": "node --watch src/server.js"
   },
   "keywords": [],
   "author": "Mardonio S Costa",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^5.5.0"
+  }
 }

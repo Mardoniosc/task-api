@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { DataBase } from "./database.js";
 import { buildRoutePath } from "./utils/build-route-path.js";
+import { importCSV } from "./utils/import-csv-file.js";
 
 const database = new DataBase();
 
@@ -40,6 +41,17 @@ export const routes = [
       database.insert('tasks', task)
 
       return res.writeHead(201).end(JSON.stringify(task))
+    }
+  },
+  {
+    method: 'POST',
+    path: buildRoutePath('/tasks/import'),
+    handler: async (req, res) => {
+
+
+      await importCSV();
+
+      return res.writeHead(204).end()
     }
   },
   {
