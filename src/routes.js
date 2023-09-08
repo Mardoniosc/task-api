@@ -21,6 +21,13 @@ export const routes = [
     handler: (req, res) => {
       const { title, description } = req.body;
 
+      if (!title || !description) {
+        return res.writeHead(400).end(JSON.stringify({
+          erro: '400',
+          message: 'Está faltando título ou descrição da tarefa!'
+        }))
+      }
+
       const task = {
         id: randomUUID(),
         title,
@@ -40,7 +47,14 @@ export const routes = [
     path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
       const { id } = req.params;
-      const { title, description, completed_at } = req.body;
+      const { title, description } = req.body;
+
+      if (!title || !description) {
+        return res.writeHead(400).end(JSON.stringify({
+          erro: '400',
+          message: 'Está faltando título ou descrição da tarefa!'
+        }))
+      }
 
       const task = {
         title,
